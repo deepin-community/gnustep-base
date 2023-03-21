@@ -1,0 +1,26 @@
+Description: Omit certificate expiration test on 32-bit architectures.
+ Both -expiresAt and -expiresAt: use the GnuTLS function
+ gnutls_x509_crt_get_expiration_time which returns time_t.  Since the
+ certificate expiration date is well beyond 2038 the test is doomed to
+ fail on all 32-bit architectures.
+ Not forwarded yet; let's see how it goes on the buildds.
+Author: Yavor Doganov <yavor@gnu.org>
+Forwarded: https://savannah.gnu.org/bugs/index.php?58546
+Last-Update: 2020-04-28
+---
+
+--- gnustep-base.orig/Tests/base/GSTLS/basic.m
++++ gnustep-base/Tests/base/GSTLS/basic.m
+@@ -27,9 +27,12 @@
+   expiresAt = [c expiresAt: 0];
+   dateFormatter = [[NSDateFormatter alloc] init];
+   [dateFormatter setDateFormat: @"yyyy-MM-dd HH:mm:ss zzz"];
++  /* Test guaranteed to fail on 32-bit architectures.  */
++#if __LP64__
+   PASS_EQUAL(expiresAt,
+     [dateFormatter dateFromString: @"2118-12-14 15:35:11 +0000"],
+     "Expiration date can be retrieved");
++#endif
+   [dateFormatter release];
+   PASS_EQUAL([c expiresAt], expiresAt,
+     "Expiration for entire list is that of the single item")

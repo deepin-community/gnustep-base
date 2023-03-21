@@ -1,0 +1,12 @@
+pkg-config-macro.patch
+fix-spelling-error.patch
+fix-tests-network.patch
+doc-links.patch
+pldes-manpage-rename.patch
+manpage-fixes.patch
+texinfo5.diff
+fix-tests-timings.patch
+autogsdoc-reproducibility.patch
+icu65.patch
+gstls-time_t-limitation.patch
+hurd-nsurlconnection.patch

@@ -1,0 +1,15 @@
+# All DTDs are handled by dh_installxmlcatalogs.
+usr/lib/GNUstep/DTDs
+
+# Info manuals that are renamed as their filenames are too generic.
+# See debian/templates/gnustep-base-doc.install.in.
+usr/share/info
+
+# Timezone data which is not installed; we use Debian's tzdata package.
+usr/lib/GNUstep/Libraries/gnustep-base/Versions/*/Resources/NSTimeZones/zones
+
+# Likewise; we rely on ca-certificates.
+usr/lib/GNUstep/Libraries/gnustep-base/Versions/*/Resources/GSTLS/ca-certificates.crt
+
+# Tool renamed; see gnustep-base-runtime.install.
+/usr/bin/pl

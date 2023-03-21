@@ -1,0 +1,11 @@
+#! /usr/bin/dh-exec
+
+# Install tools
+@GS_TOOLS@/[!p]*
+@GS_TOOLS@/pl?*
+
+# Rename pl tool, to avoid conflict with tendra package
+@GS_TOOLS@/pl => @GS_TOOLS@/plio
+
+# All manpages are installed in this package.
+usr/share/man

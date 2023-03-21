@@ -1,0 +1,3 @@
+# A node from a Texinfo manual in HTML format shipped in GNUstep's standard
+# documentation directory.
+gnustep-base-doc: package-contains-documentation-outside-usr-share-doc usr/share/GNUstep/Documentation/Developer/CodingStandards/gs-standards/Contributing.html

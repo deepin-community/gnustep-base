@@ -1,0 +1,13 @@
+#! /usr/bin/dh-exec
+
+# Install doc
+@GS_DOC@/*
+
+# Manually install the HTML manuals as gnustep-make cannot cope with the
+# @setfilename change.
+Documentation/manual/gs-base/*	@GS_DOC@/Developer/Base/ProgrammingManual/gs-base/
+Documentation/gs-standards/*	@GS_DOC@/Developer/CodingStandards/gs-standards/
+
+# Rename Info documents with generic/ambiguous names.
+Documentation/manual/manual.info 	=> @GS_INFO@/gs-base.info
+Documentation/coding-standards.info	=> @GS_INFO@/gs-standards.info

@@ -1,0 +1,24 @@
+#!/bin/sh
+
+set -e
+set -u
+
+# Upgrades from stretch to buster have made the gdomap daemon enabled
+# by default which is undesirable.  Explicitly delete the symlinks and
+# let update-rc.d recreate them in postinst.  See #939119.
+# Remove after bullseye is released.
+if [ "$1" = "upgrade" ]; then
+    if dpkg --compare-versions "$2" lt 1.26.0-6; then
+        ENABLED=no
+        if [ -f /etc/default/gdomap ]; then
+            . /etc/default/gdomap
+        fi
+        if [ "$ENABLED" != "yes" ]; then
+            find /etc/rc?.d -name "*gdomap" -delete
+        fi
+    fi
+fi
+
+#DEBHELPER#
+
+exit 0
