@@ -1,0 +1,3 @@
+usr/bin
+# All manpages are installed in this package.
+usr/share/man

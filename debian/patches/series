@@ -1,0 +1,12 @@
+pkg-config-macro.patch
+fix-spelling-error.patch
+fix-tests-network.patch
+manpage-fixes.patch
+fix-tests-timings.patch
+autogsdoc-reproducibility.patch
+hurd-nsurlconnection.patch
+plutil-manpage.patch
+kbsd-test.patch
+tmp-test-fix.patch
+nstimezone-32bit-time_t.patch
+nscalendardate-hppa+ppc.patch

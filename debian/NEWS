@@ -1,0 +1,23 @@
+gnustep-base (1.26.0-6) unstable; urgency=medium
+
+  The gdomap daemon has been inadvertently enabled in 1.25.1-1 while
+  implementing a new Debian Policy requirement (§9.3.3.1).  This version
+  forcefully disables it again.  If you want the daemon running, run
+  "update-rc.d gdomap enable" to enable it.
+
+ -- Yavor Doganov <yavor@gnu.org>  Fri, 20 Sep 2019 13:42:35 +0300
+
+gnustep-base (1.25.0-1) experimental; urgency=medium
+
+  The example programs using the GNUstep Base library have been moved to
+  the gnustep-base-doc package.  The gnustep-base-examples package has
+  been removed.
+
+ -- Yavor Doganov <yavor@gnu.org>  Sat, 30 Sep 2017 13:54:45 +0300
+
+gnustep-base (1.24.6-1) experimental; urgency=low
+
+  The gdomap daemon is now disabled by default.  Edit /etc/default/gdomap
+  to enable it.
+
+ -- Yavor Doganov <yavor@gnu.org>  Sat, 24 May 2014 04:31:11 +0300
