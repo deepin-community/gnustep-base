@@ -1,8 +1,84 @@
-gnustep-base (1.29.0-3deepin) unstable; urgency=medium
+gnustep-base (1.29.0-7) unstable; urgency=medium
 
-  * update changelog.
+  * debian/templates/control.m4 (Build-Depends): Replace tzdata with
+    tzdata-legacy; fixes FTBFS and autopkgtest failure with recent tzdata
+    (Closes: #1050528, #1052840).  Thanks Paul Gevers for the report.
+    (gnustep-base-common) <Depends>: Likewise.  This has the unfortunate
+    effect of pulling in tzdata-legacy on practically every GNUstep
+    installation but it's necessary so that methods like NSTimeZone
+    +timeZoneWithAbbreviation: continue to work.
+  * debian/control: Regenerate.
+  * debian/patches/kbsd-test.patch: Delete as it is no longer applicable;
+    regretfully GNU/kFreeBSD is no more.
+  * debian/rules (override_dh_auto_configure): Don't pass
+    ac_cv_lib_kvm_kvm_getenvv=no; was only needed for GNU/kFreeBSD.
+    (override_dh_auto_test): Remove kfreebsd-specific snippet.
+  * debian/tests/testsuite: Sync configure arguments with the
+    override_dh_auto_configure target.
 
- -- LiChengGang <lichenggang@uniontech.com>  Wed, 22 Mar 2023 13:58:49 +0800
+ -- Yavor Doganov <yavor@gnu.org>  Wed, 27 Sep 2023 07:41:50 +0300
+
+gnustep-base (1.29.0-6) unstable; urgency=medium
+
+  * debian/patches/hurd-nsurlconnection.patch: Delete; issue gone somehow.
+  * debian/patches/nscalendardate-hppa+ppc.patch: Enable and refresh.
+    Mark as Debian-specific as it's not a real fix to be forwarded.
+  * debian/patches/NSURL-tests-new-url.patch: Explicitly mark as
+    Forwarded: not-needed.  Lintian correctly assumes that it doesn't need
+    forwarding as it's taken from upstream, however udd.d.o does not.
+  * debian/patches/TestHelper-category-interface.patch: Likewise.
+
+ -- Yavor Doganov <yavor@gnu.org>  Wed, 02 Aug 2023 17:39:40 +0300
+
+gnustep-base (1.29.0-5) unstable; urgency=medium
+
+  * debian/patches/tmp-test-fix.patch: Remove and replace with new patches
+    containing the (unrelated) actual fixes sent upstream.
+  * debian/patches/TestHelper-category-interface.patch: New; add interface
+    for category (taken from upstream, identical with our fix).
+  * debian/patches/tzdb.h-include.patch: New.
+  * debian/patches/GSTimeZoneDetail-retain-abbrev.patch: New; an attempt
+    to fix the problem exposed in the testsuite (forwarded upstream).
+  * debian/patches/NSURL-tests-new-url.patch: New; replace httpbin.org
+    with example.com as it is more reliable (taken from upstream), thanks
+    Adrien Nader (Closes: #1038725).
+  * debian/patches/HTMLLinker-troff-warning.patch: New; fix a warning
+    exposed with groff/1.23.0.
+  * debian/patches/fix-spelling-error.patch: Mark as forwarded.
+  * debian/patches/nstimezone-32bit-time_t.patch: Likewise.
+  * debian/patches/fix-tests-network.patch: Mark as Debian-specific.
+  * debian/patches/fix-tests-timings.patch: Likewise.
+  * debian/patches/hurd-nsurlconnection.patch: Disable for now.
+  * debian/patches/nscalendardate-hppa+ppc.patch: Likewise.
+  * debian/gnustep-base-runtime.gdomap.service: New file; provide a
+    systemd unit for gdomap (Closes: #1029997, #1039212).
+  * debian/gdomap-helper: New file -- common helper script to start/stop
+    gdomap; used both by the init script and the systemd unit.
+  * debian/templates/gnustep-base-runtime.gdomap.init.in: Move to...
+  * debian/gnustep-base-runtime.gdomap.init: ...as it's useless to
+    generate it from a template.  Modify it to use gdomap-helper.
+  * debian/gnustep-base-runtime.install: Install gdomap-helper in
+    /usr/libexec as it's not supposed to be run by a user.
+  * debian/clean: Remove debian/gnustep-base-runtime.gdomap.init.
+    Delete all .type files; fixes building twice in a row.
+  * debian/gnustep-base-runtime.lintian-overrides: Override no-manual-page
+    [usr/libexec/gdomap-helper]; oddly enough, lintian complains despite
+    the fact that binaries in /usr/libexec are not required to have one.
+  * debian/rules (override_dh_auto_configure): Don't generate
+    gnustep-base-runtime.gdomap.init.
+    (override_dh_installsystemd): New; pass --no-enable --no-start.
+
+ -- Yavor Doganov <yavor@gnu.org>  Sun, 30 Jul 2023 19:37:39 +0300
+
+gnustep-base (1.29.0-4) unstable; urgency=medium
+
+  * Upload to unstable.
+  * debian/gbp.conf: Remove debian-branch.
+  * debian/patches/tmp-test-fix.patch: Move #include of tzdb.h in
+    NSTimeZone.m a bit earlier so that the POSIX_TZONES conditional is
+    correct.  As of tzdata/2023c-6 /usr/share/zoneinfo/posix is removed.
+
+ -- Yavor Doganov <yavor@gnu.org>  Fri, 16 Jun 2023 23:14:46 +0300
 
 gnustep-base (1.29.0-3) experimental; urgency=medium
 
@@ -41,6 +117,15 @@ gnustep-base (1.29.0-2) experimental; urgency=medium
   * debian/clean: Add gnustep-base-doc.{install,links}.
 
  -- Yavor Doganov <yavor@gnu.org>  Wed, 22 Feb 2023 18:53:19 +0200
+
+gnustep-base (1.28.1+really1.28.0-5) unstable; urgency=medium
+
+  * Revert uploads 1.28.1-1 and 1.28.1-2 thus restoring upstream 1.28.0
+    release.  1.28.1 was mistakently uploaded to unstable as it introduced
+    an ABI break discovered post-factum (Closes: #1028189).
+  * debian/gbp.conf: Set debian-branch to snafu.
+
+ -- Yavor Doganov <yavor@gnu.org>  Mon, 09 Jan 2023 16:54:48 +0200
 
 gnustep-base (1.29.0-1) experimental; urgency=medium
 

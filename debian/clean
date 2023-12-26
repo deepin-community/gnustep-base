@@ -1,5 +1,4 @@
-Tests/base/coding/long-8.type
-Tests/base/coding/ulong-8.type
+Tests/base/coding/*.type
 Tests/base/NSURL/Capture.dat
 Documentation/coding-standards.aux
 Documentation/coding-standards.toc
@@ -34,10 +33,8 @@ Source/dynamic-load.h
 debian/gnustep-base-common.xmlcatalogs
 debian/gnustep-base-common.install
 debian/gnustep-base-common.links
-debian/gnustep-base-runtime.gdomap
 debian/gnustep-base-runtime.postinst
 debian/gnustep-base-runtime.postrm
-debian/gnustep-base-runtime.gdomap.init
 debian/gnustep-base-runtime.links
 debian/libgnustep-base-dev.install
 debian/libgnustep-base1.*.install

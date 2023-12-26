@@ -1,12 +1,12 @@
 Description: Skip some tests on hppa/powerpc that fail for yet unknown reasons.
 Author: Yavor Doganov <yavor@gnu.org>
-Forwarded: no
-Last-Update: 2023-02-23
+Forwarded: not-needed
+Last-Update: 2023-08-02
 ---
 
 --- gnustep-base.orig/Tests/base/NSCalendarDate/test00.m
 +++ gnustep-base/Tests/base/NSCalendarDate/test00.m
-@@ -240,6 +240,7 @@
+@@ -238,6 +238,7 @@
    PASS([date2 testDateValues: 2100 : 02 : 28 : 23 : 00 : 01],
      "date check with %s", [[date2 description] UTF8String]);
  
@@ -14,7 +14,7 @@ Last-Update: 2023-02-23
    /* daylight savings time checks */
    [NSTimeZone setDefaultTimeZone: [NSTimeZone timeZoneWithName: @"GB"]];
  
-@@ -273,6 +274,7 @@
+@@ -271,6 +272,7 @@
    PASS([date2 testDateValues: 2002 : 03 : 30 : 23 : 30 : 00],
      "date check with %s", [[date2 description] UTF8String]);
    /* End daylight savings checks */

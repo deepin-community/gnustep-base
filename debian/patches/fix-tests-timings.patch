@@ -1,6 +1,8 @@
 From: Eric Heintzmann <heintzmann.eric@free.fr>
 Description: Lengthen the time the tests wait for process startup.
+Forwarded: not-needed
 Last-Update: 2022-12-31
+---
 
 --- a/Tests/base/NSURLConnection/Helpers/NSURLConnectionTest.m
 +++ b/Tests/base/NSURLConnection/Helpers/NSURLConnectionTest.m

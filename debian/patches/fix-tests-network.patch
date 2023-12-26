@@ -2,6 +2,7 @@ Description: Set as hopeful some networking tests.
  - Set as hopeFul some tests that inevitably fail
    if networking is disabled.
 Author: Eric Heintzmann <heintzmann.eric@free.fr>
+Forwarded: not-needed
 Last-Update: 2016-05-25
 ---
 
