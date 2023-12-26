@@ -2,7 +2,7 @@ Description: Fix FTBFS on 32-bit architectures.
  Omit tests relying on 64bit time_t.
 Author: Yavor Doganov <yavor@gnu.org>
 Debian-Bug: https://bugs.debian.org/1028020
-Forwarded: no
+Forwarded: https://savannah.gnu.org/bugs/?64434
 Last-Update: 2023-02-21
 ---
 

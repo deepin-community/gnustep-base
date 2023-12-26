@@ -19,7 +19,7 @@ Build-Depends: debhelper-compat (= 13),
                m4,
                libavahi-client-dev,
                libicu-dev,
-               tzdata
+               tzdata-legacy,
 Build-Depends-Indep: texinfo <!nodoc>,
                      texlive-latex-base <!nodoc>,
                      texlive-fonts-recommended <!nodoc>,
@@ -35,7 +35,7 @@ Package: gnustep-base-common
 Architecture: all
 Depends: gnustep-common (>= 2.9.1-2),
          ca-certificates,
-         tzdata,
+         tzdata-legacy,
          ${misc:Depends}
 Description: GNUstep Base library - common files
  The GNUstep Base Library is a powerful fast library of
