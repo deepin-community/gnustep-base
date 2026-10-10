@@ -146,7 +146,7 @@ ifdef docs
 endif
 
 override_dh_auto_test:
-	dh_auto_test -- \
+	LC_ALL=en_US.UTF-8 dh_auto_test -- \
 	    $(verbose)  || (cat Tests/tests.log; exit 1)
 
 override_dh_auto_install-arch:
