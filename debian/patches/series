@@ -12,3 +12,4 @@ tzdb.h-include.patch
 GSTimeZoneDetail-retain-abbrev.patch
 NSURL-tests-new-url.patch
 HTMLLinker-troff-warning.patch
+nscalendar-era-locale.patch
