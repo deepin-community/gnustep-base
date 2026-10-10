@@ -2,6 +2,7 @@ gnustep-base (1.29.0-7deepin1) unstable; urgency=medium
 
   * Fix NSCalendar test under non-English locales. Backported from
     https://github.com/gnustep/libs-base/commit/ecc5d8008ce2073d5294289006f3bcb5ecd11395.
+  * Run the tests under en_US.UTF-8.
 
  -- Tianyu Chen <sweetyfish@deepin.org>  Sat, 10 Oct 2026 16:53:17 +0800
 
