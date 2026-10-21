@@ -1,3 +1,23 @@
+gnustep-base (1.29.0-7deepin2) unstable; urgency=medium
+
+  * Add debian/patches/nstimezone-guess-tzdir.patch: fix detection of the
+    system zoneinfo directory in NSTimeZone.  The fallback which guesses
+    tzdir from /etc/localtime probes for a file named 'GMT', but 'Etc/'
+    contains such a file too, so when /etc/localtime is a symlink to
+    Etc/UTC (the usual configuration on build daemons) tzdir ended up as
+    /usr/share/zoneinfo/Etc and every lookup of a zone outside Etc/ failed:
+    +timeZoneWithName: returned nil silently and +knownTimeZoneNames raised
+    an exception because it enumerates a nil path.  The test suite aborted
+    or failed because of this, since it runs before the GNUstep resource
+    files (which normally provide the zone name and rescue the lookup) are
+    installed.
+  * Add debian/patches/nscalendardate-test02-cet.patch: expect CET rather
+    than MET for the %Z tests in Tests/base/NSCalendarDate/test02.m, as the
+    IANA time zone data now makes the MET zone behave as CET.  Mirrors
+    upstream commit 46d19b5dd5.
+
+ -- lichenggang <lichenggang@uniontech.com>  Wed, 21 Oct 2026 22:42:56 +0800
+
 gnustep-base (1.29.0-7deepin1) unstable; urgency=medium
 
   * Fix NSCalendar test under non-English locales. Backported from
