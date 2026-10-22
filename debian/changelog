@@ -1,3 +1,14 @@
+gnustep-base (1.29.0-8deepin1) unstable; urgency=medium
+
+  * Restore the deepin patches removed by the version update
+    (nscalendar-era-locale.patch, nstimezone-guess-tzdir.patch,
+    nscalendardate-test02-cet.patch) and the LC_ALL=en_US.UTF-8 in
+    override_dh_auto_test.  Without them the NSCalendar, NSCalendarDate and
+    NSTimeZone tests fail and the package FTBFS, which is why this PR was
+    converted into a version update in the first place.
+
+ -- lichenggang <lichenggang@uniontech.com>  Thu, 22 Oct 2026 17:38:47 +0800
+
 gnustep-base (1.29.0-8) unstable; urgency=medium
 
   * debian/patches/libxml2-2.11.patch: New; fix FTBFS with libxml2 >= 2.11

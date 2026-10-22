@@ -1,0 +1,50 @@
+Description: Fix detection of the system zoneinfo directory.
+ NSTimeZone's +systemTimeZone: falls back to guessing the zoneinfo
+ directory when the name of the local time zone cannot be obtained from
+ the user defaults, the GNUSTEP_TZ environment variable or the
+ 'localtime' resource file.  It resolves /etc/localtime and then walks up
+ from its directory until it finds a directory containing a file named
+ 'GMT'.
+ That marker is not unique to the zoneinfo root directory: the 'Etc'
+ subdirectory contains one too, so when /etc/localtime is a symlink to
+ e.g. /usr/share/zoneinfo/Etc/UTC (the usual configuration in chroots,
+ containers and on freshly installed systems) the search stops after a
+ single step and the global tzdir is left pointing at
+ /usr/share/zoneinfo/Etc.  Every subsequent lookup of a zone name is then
+ performed relative to that directory, so all zones outside Etc/ fail to
+ load: +timeZoneWithName: returns nil without a diagnostic and
+ +knownTimeZoneNames raises an exception, because it enumerates a nil
+ path.
+ Use 'zone.tab' as the marker instead; that file exists only in the
+ zoneinfo root directory.
+ .
+ This is what makes the package FTBFS on the build daemon: the test suite
+ runs before the GNUstep resource files (which normally provide the zone
+ name via the 'localtime' resource and rescue the lookup through the
+ 'zones' resource) are installed, so the buggy fallback is reached.
+Author: lichenggang <lichenggang@uniontech.com>
+Forwarded: no
+Last-Update: 2026-10-21
+---
+
+--- gnustep-base.orig/Source/NSTimeZone.m
++++ gnustep-base/Source/NSTimeZone.m
+@@ -1576,11 +1576,16 @@
+ 		@"file (SYSTEM_TIME_FILE): '%@'", localZoneString];
+ 	      localZoneString
+ 		= [localZoneString stringByResolvingSymlinksInPath];
+-	      /* Guess what tzdir is */
++	      /* Guess what tzdir is.  The marker used must be a file which
++	       * only exists in the zoneinfo root directory; probing for a
++	       * file named 'GMT' is not enough since 'Etc/' contains one too,
++	       * so the search stops too early whenever the localtime file
++	       * points at a zone below a subdirectory, as with Etc/UTC.
++	       */
+ 	      tzdir = [localZoneString stringByDeletingLastPathComponent];
+ 	      while ([tzdir length] > 2
+ 		&& [dflt fileExistsAtPath:
+-		[tzdir stringByAppendingPathComponent: @"GMT"]] == NO)
++		[tzdir stringByAppendingPathComponent: @"zone.tab"]] == NO)
+ 		{
+ 		  tzdir = [tzdir stringByDeletingLastPathComponent];
+ 		}
