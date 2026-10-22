@@ -13,3 +13,6 @@ GSTimeZoneDetail-retain-abbrev.patch
 NSURL-tests-new-url.patch
 HTMLLinker-troff-warning.patch
 libxml2-2.11.patch
+nscalendar-era-locale.patch
+nstimezone-guess-tzdir.patch
+nscalendardate-test02-cet.patch

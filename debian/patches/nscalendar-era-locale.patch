@@ -1,0 +1,26 @@
+From: =?utf-8?b?0KHRgtGA0LDRhdC40ZrQsCDQoNCw0LTQuNGb?=
+ <contact@strahinja.org>
+Date: Sun, 3 Dec 2023 19:03:45 +0100
+Subject: Tests/base/NSCalendar/era.m: Fix testing with non-English locale
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Страхиња Радић <contact@strahinja.org>
+---
+ Tests/base/NSCalendar/era.m | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/Tests/base/NSCalendar/era.m b/Tests/base/NSCalendar/era.m
+index f284130..3abaaca 100644
+--- a/Tests/base/NSCalendar/era.m
++++ b/Tests/base/NSCalendar/era.m
+@@ -32,6 +32,8 @@ int main()
+   /* Test getEra:year:month:day:fromDate:
+    */
+   dateFormatter = [[NSDateFormatter alloc] init];
++  [dateFormatter setLocale: [[NSLocale alloc] initWithLocaleIdentifier:
++	[NSLocale canonicalLocaleIdentifierFromString: @"en_US"]]];
+   cal = [NSCalendar currentCalendar];
+   [cal setTimeZone:[NSTimeZone timeZoneWithName: @"America/New_York"]];
+   [dateFormatter setDateFormat: @"d MMM yyyy HH:mm:ss Z"];
