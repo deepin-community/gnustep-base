@@ -1,0 +1,21 @@
+Description: Fix compilation with libxml2 > 2.11.
+Origin: upstream, commit:37913d0
+Forwarded: not-needed
+Last-Update: 2024-06-16
+---
+
+--- gnustep-base.orig/Source/Additions/GSXML.m
++++ gnustep-base/Source/Additions/GSXML.m
+@@ -2671,10 +2671,12 @@
+                   return NULL;
+                 }
+               ret->owner = 1;
++#if LIBXML_VERSION < 21100
+               if (ret->checked == 0)
+                 {
+                   ret->checked = 1;
+                 }
++#endif
+             }
+         }
+     }
